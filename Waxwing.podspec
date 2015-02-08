@@ -12,16 +12,14 @@ Pod::Spec.new do |s|
 
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
-
   s.author             = { "Jan Gorman" => "gorman.jan@gmail.com" }
   s.social_media_url   = "http://twitter.com/JanGorman"
 
   s.platform     = :ios, "8.0"
-
-  s.source       = { :git => "https://github.com/JanGorman/Waxwing.git", :tag => "1.0.0" }
-
-  s.source_files  = "Classes", "Waxwing/Waxwing.swift"
-
   s.requires_arc = true
+  
+  s.source       = { :git => "https://github.com/JanGorman/Waxwing.git", :tag => s.version.to_s }
+
+  s.source_files  = "Waxwing/Waxwing.swift"
 
 end
