@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F2BCA9FF1A84055E00D7DD0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCA9FE1A84055E00D7DD0D /* AppDelegate.swift */; };
+		F2BCAA011A84055E00D7DD0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCAA001A84055E00D7DD0D /* ViewController.swift */; };
+		F2BCAA041A84055E00D7DD0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2BCAA021A84055E00D7DD0D /* Main.storyboard */; };
+		F2BCAA061A84055E00D7DD0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2BCAA051A84055E00D7DD0D /* Images.xcassets */; };
+		F2BCAA091A84055E00D7DD0D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2BCAA071A84055E00D7DD0D /* LaunchScreen.xib */; };
+		F2BCAA151A84055F00D7DD0D /* WaxwingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCAA141A84055F00D7DD0D /* WaxwingTests.swift */; };
+		F2BCAA1F1A84056B00D7DD0D /* Waxwing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCAA1E1A84056B00D7DD0D /* Waxwing.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F2BCAA0F1A84055F00D7DD0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2BCA9F11A84055E00D7DD0D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2BCA9F81A84055E00D7DD0D;
+			remoteInfo = Waxwing;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F2BCA9F91A84055E00D7DD0D /* Waxwing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waxwing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2BCA9FD1A84055E00D7DD0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2BCA9FE1A84055E00D7DD0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F2BCAA001A84055E00D7DD0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F2BCAA031A84055E00D7DD0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F2BCAA051A84055E00D7DD0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F2BCAA081A84055E00D7DD0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F2BCAA0E1A84055F00D7DD0D /* WaxwingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaxwingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2BCAA131A84055F00D7DD0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2BCAA141A84055F00D7DD0D /* WaxwingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaxwingTests.swift; sourceTree = "<group>"; };
+		F2BCAA1E1A84056B00D7DD0D /* Waxwing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waxwing.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F2BCA9F61A84055E00D7DD0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2BCAA0B1A84055F00D7DD0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F2BCA9F01A84055E00D7DD0D = {
+			isa = PBXGroup;
+			children = (
+				F2BCA9FB1A84055E00D7DD0D /* Waxwing */,
+				F2BCAA111A84055F00D7DD0D /* WaxwingTests */,
+				F2BCA9FA1A84055E00D7DD0D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F2BCA9FA1A84055E00D7DD0D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2BCA9F91A84055E00D7DD0D /* Waxwing.app */,
+				F2BCAA0E1A84055F00D7DD0D /* WaxwingTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F2BCA9FB1A84055E00D7DD0D /* Waxwing */ = {
+			isa = PBXGroup;
+			children = (
+				F2BCA9FE1A84055E00D7DD0D /* AppDelegate.swift */,
+				F2BCAA001A84055E00D7DD0D /* ViewController.swift */,
+				F2BCAA021A84055E00D7DD0D /* Main.storyboard */,
+				F2BCAA051A84055E00D7DD0D /* Images.xcassets */,
+				F2BCAA071A84055E00D7DD0D /* LaunchScreen.xib */,
+				F2BCA9FC1A84055E00D7DD0D /* Supporting Files */,
+				F2BCAA1E1A84056B00D7DD0D /* Waxwing.swift */,
+			);
+			path = Waxwing;
+			sourceTree = "<group>";
+		};
+		F2BCA9FC1A84055E00D7DD0D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F2BCA9FD1A84055E00D7DD0D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F2BCAA111A84055F00D7DD0D /* WaxwingTests */ = {
+			isa = PBXGroup;
+			children = (
+				F2BCAA141A84055F00D7DD0D /* WaxwingTests.swift */,
+				F2BCAA121A84055F00D7DD0D /* Supporting Files */,
+			);
+			path = WaxwingTests;
+			sourceTree = "<group>";
+		};
+		F2BCAA121A84055F00D7DD0D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F2BCAA131A84055F00D7DD0D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F2BCA9F81A84055E00D7DD0D /* Waxwing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2BCAA181A84055F00D7DD0D /* Build configuration list for PBXNativeTarget "Waxwing" */;
+			buildPhases = (
+				F2BCA9F51A84055E00D7DD0D /* Sources */,
+				F2BCA9F61A84055E00D7DD0D /* Frameworks */,
+				F2BCA9F71A84055E00D7DD0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Waxwing;
+			productName = Waxwing;
+			productReference = F2BCA9F91A84055E00D7DD0D /* Waxwing.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F2BCAA0D1A84055F00D7DD0D /* WaxwingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2BCAA1B1A84055F00D7DD0D /* Build configuration list for PBXNativeTarget "WaxwingTests" */;
+			buildPhases = (
+				F2BCAA0A1A84055F00D7DD0D /* Sources */,
+				F2BCAA0B1A84055F00D7DD0D /* Frameworks */,
+				F2BCAA0C1A84055F00D7DD0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2BCAA101A84055F00D7DD0D /* PBXTargetDependency */,
+			);
+			name = WaxwingTests;
+			productName = WaxwingTests;
+			productReference = F2BCAA0E1A84055F00D7DD0D /* WaxwingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F2BCA9F11A84055E00D7DD0D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Jan Gorman";
+				TargetAttributes = {
+					F2BCA9F81A84055E00D7DD0D = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					F2BCAA0D1A84055F00D7DD0D = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = F2BCA9F81A84055E00D7DD0D;
+					};
+				};
+			};
+			buildConfigurationList = F2BCA9F41A84055E00D7DD0D /* Build configuration list for PBXProject "Waxwing" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F2BCA9F01A84055E00D7DD0D;
+			productRefGroup = F2BCA9FA1A84055E00D7DD0D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F2BCA9F81A84055E00D7DD0D /* Waxwing */,
+				F2BCAA0D1A84055F00D7DD0D /* WaxwingTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F2BCA9F71A84055E00D7DD0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2BCAA041A84055E00D7DD0D /* Main.storyboard in Resources */,
+				F2BCAA091A84055E00D7DD0D /* LaunchScreen.xib in Resources */,
+				F2BCAA061A84055E00D7DD0D /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2BCAA0C1A84055F00D7DD0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F2BCA9F51A84055E00D7DD0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2BCAA011A84055E00D7DD0D /* ViewController.swift in Sources */,
+				F2BCA9FF1A84055E00D7DD0D /* AppDelegate.swift in Sources */,
+				F2BCAA1F1A84056B00D7DD0D /* Waxwing.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2BCAA0A1A84055F00D7DD0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2BCAA151A84055F00D7DD0D /* WaxwingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F2BCAA101A84055F00D7DD0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2BCA9F81A84055E00D7DD0D /* Waxwing */;
+			targetProxy = F2BCAA0F1A84055F00D7DD0D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F2BCAA021A84055E00D7DD0D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2BCAA031A84055E00D7DD0D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F2BCAA071A84055E00D7DD0D /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2BCAA081A84055E00D7DD0D /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F2BCAA161A84055F00D7DD0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F2BCAA171A84055F00D7DD0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F2BCAA191A84055F00D7DD0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Waxwing/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F2BCAA1A1A84055F00D7DD0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Waxwing/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F2BCAA1C1A84055F00D7DD0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WaxwingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Waxwing.app/Waxwing";
+			};
+			name = Debug;
+		};
+		F2BCAA1D1A84055F00D7DD0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WaxwingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Waxwing.app/Waxwing";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F2BCA9F41A84055E00D7DD0D /* Build configuration list for PBXProject "Waxwing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2BCAA161A84055F00D7DD0D /* Debug */,
+				F2BCAA171A84055F00D7DD0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2BCAA181A84055F00D7DD0D /* Build configuration list for PBXNativeTarget "Waxwing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2BCAA191A84055F00D7DD0D /* Debug */,
+				F2BCAA1A1A84055F00D7DD0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F2BCAA1B1A84055F00D7DD0D /* Build configuration list for PBXNativeTarget "WaxwingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2BCAA1C1A84055F00D7DD0D /* Debug */,
+				F2BCAA1D1A84055F00D7DD0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F2BCA9F11A84055E00D7DD0D /* Project object */;
+}
