@@ -33,7 +33,7 @@ Waxwing.migrateToVersion("0.9", [FirstMigrationClass(), SecondMigrationClass()])
 
 Note, that closure based migrations are run from the thread they are created on so any thing that has to run on the main thread, such as notifying your users of changes introduced with this version or something similar, needs to explictly call the method on the main thread.
 
-The `NSOperationQueue` based migrations are always run from their own queue so the same caveat applies.
+The `NSOperationQueue` based migrations are always run from their own queue so the same caveat applies. Also note, that if any of the migrations in the queue depend on another one having run first, you explicitly need to add that dependency. `NSOperation` of course makes this trivial through the `addDependency()` method.
 
 You can add as many migrations as you want. They will always be executed once which makes reasoning about the state of your application a lot easier.
 
