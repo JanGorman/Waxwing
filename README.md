@@ -41,7 +41,7 @@ import Waxwing
 Waxwing.migrateToVersion("0.9", [FirstMigrationClass(), SecondMigrationClass()])
 ```
 
-Note, that closure based migrations are run from the thread they are created on so any thing that has to run on the main thread, such as notifying your users of changes introduced with this version or something similar, needs to explictly call the method on the main thread:
+Note that closure based migrations are run from the thread they are created on. Anything that has to run on the main thread, such as notifying your users of changes introduced with this version, needs to explictly call the method on the main thread:
 
 ``` swift
 import Waxwing
