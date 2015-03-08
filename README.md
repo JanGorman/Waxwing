@@ -6,6 +6,9 @@ iOS version migrations in Swift. When mangling data or performing any other kind
 
 * iOS 8+
 
+For Swift 1.2 use the branch `Swift/1.2`
+
+
 ## Installation
 
 Waxwing is available through [CocoaPods](http://cocoapods.org). To install
