@@ -7,13 +7,13 @@ import Foundation
 
 public typealias WaxwingMigrationBlock = () -> Void
 
-public struct Waxwing {
+public class Waxwing {
 
     private static let migratedToKey = "com.schnaub.Waxwing.migratedTo"
     private static let migrationQueue = "com.schnaub.Waxwing.queue"
 
     private static var appVersion: String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as String
+        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
 
     private static var defaults: NSUserDefaults {
