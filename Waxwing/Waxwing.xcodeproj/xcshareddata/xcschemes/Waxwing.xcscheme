@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2BCA9F81A84055E00D7DD0D"
-               BuildableName = "Waxwing.app"
+               BlueprintIdentifier = "F251689B1AAF8E0B00CFD316"
+               BuildableName = "Waxwing.framework"
                BlueprintName = "Waxwing"
                ReferencedContainer = "container:Waxwing.xcodeproj">
             </BuildableReference>
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2BCAA0D1A84055F00D7DD0D"
+               BlueprintIdentifier = "F25168A61AAF8E0B00CFD316"
                BuildableName = "WaxwingTests.xctest"
                BlueprintName = "WaxwingTests"
                ReferencedContainer = "container:Waxwing.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2BCAA0D1A84055F00D7DD0D"
+               BlueprintIdentifier = "F25168A61AAF8E0B00CFD316"
                BuildableName = "WaxwingTests.xctest"
                BlueprintName = "WaxwingTests"
                ReferencedContainer = "container:Waxwing.xcodeproj">
@@ -56,8 +56,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F2BCA9F81A84055E00D7DD0D"
-            BuildableName = "Waxwing.app"
+            BlueprintIdentifier = "F251689B1AAF8E0B00CFD316"
+            BuildableName = "Waxwing.framework"
             BlueprintName = "Waxwing"
             ReferencedContainer = "container:Waxwing.xcodeproj">
          </BuildableReference>
@@ -72,16 +72,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F2BCA9F81A84055E00D7DD0D"
-            BuildableName = "Waxwing.app"
+            BlueprintIdentifier = "F251689B1AAF8E0B00CFD316"
+            BuildableName = "Waxwing.framework"
             BlueprintName = "Waxwing"
             ReferencedContainer = "container:Waxwing.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -91,16 +90,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F2BCA9F81A84055E00D7DD0D"
-            BuildableName = "Waxwing.app"
+            BlueprintIdentifier = "F251689B1AAF8E0B00CFD316"
+            BuildableName = "Waxwing.framework"
             BlueprintName = "Waxwing"
             ReferencedContainer = "container:Waxwing.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

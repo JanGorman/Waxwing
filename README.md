@@ -7,6 +7,7 @@ iOS version migrations in Swift. When mangling data or performing any other kind
 ## Requirements
 
 * iOS 8+
+* Swift 1.2
 
 ## Installation
 
@@ -15,7 +16,7 @@ it, simply add the following line to your Podfile:
 
     pod "Waxwing"
     
-If you don't like Cocoapods just include `Waxwing.swift` in your project.
+If you don't like Cocoapods, you can also add the dependency via [Carthage](https://github.com/Carthage/Carthage) or simply include `Waxwing.swift` in your project.
 
 ## Usage
 
@@ -26,7 +27,9 @@ import Waxwing
 
 …
 
-Waxwing.migrateToVersion("0.9") {
+let waxwing = Waxwing(bundle: NSBundle.mainBundle(), defaults: NSUserDefaults.standardUserDefaults())
+
+waxwing.migrateToVersion("0.9") {
 	firstMigrationCall()
 	secondMigrationCall()
 	…
@@ -40,6 +43,8 @@ import Waxwing
 
 …
 
+let waxwing = Waxwing(bundle: NSBundle.mainBundle(), defaults: NSUserDefaults.standardUserDefaults())
+
 Waxwing.migrateToVersion("0.9", [FirstMigrationClass(), SecondMigrationClass()])
 ```
 
@@ -48,8 +53,10 @@ Note, that closure based migrations are run from the thread they are created on 
 ``` swift
 import Waxwing
 
+let waxwing = Waxwing(bundle: NSBundle.mainBundle(), defaults: NSUserDefaults.standardUserDefaults())
+
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-	Waxwing.migrateToVersion("0.9") {
+	waxwing.migrateToVersion("0.9") {
 		someMigrationFunction()
 		
 		dispatch_async(dispatch_get_main_queue()) {
