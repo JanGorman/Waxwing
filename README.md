@@ -53,9 +53,8 @@ Note, that closure based migrations are run from the thread they are created on 
 ``` swift
 import Waxwing
 
-let waxwing = Waxwing(bundle: NSBundle.mainBundle(), defaults: NSUserDefaults.standardUserDefaults())
-
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+	let waxwing = Waxwing(bundle: NSBundle.mainBundle(), defaults: NSUserDefaults.standardUserDefaults())
 	waxwing.migrateToVersion("0.9") {
 		someMigrationFunction()
 		
