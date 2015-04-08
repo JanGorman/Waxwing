@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
   
   s.source       = { :git => "https://github.com/JanGorman/Waxwing.git", :tag => s.version.to_s }
 
-  s.source_files  = "Waxwing/Waxwing.swift"
+  s.source_files  = "Waxwing/WaxWing/Waxwing.swift"
 
 end
