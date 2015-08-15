@@ -8,35 +8,54 @@ import Foundation
 public typealias WaxwingMigrationBlock = () -> Void
 
 public class Waxwing {
-    
+
     private let migratedToKey = "com.schnaub.Waxwing.migratedTo"
     private let migrationQueue = "com.schnaub.Waxwing.queue"
-    
+
     private let bundle: NSBundle
     private let defaults: NSUserDefaults
-    
+    private var progress: NSProgress?
+
     public init(bundle: NSBundle, defaults: NSUserDefaults) {
         self.bundle = bundle
         self.defaults = defaults
     }
     
-    public func migrateToVersion(version: String, migrationBlock: WaxwingMigrationBlock) {
+    public func migrateToVersion(version: String, mainProgress: NSProgress? = nil, migrationBlock: WaxwingMigrationBlock) {
         if canUpdateTo(version) {
+            if let mainProgress = mainProgress {
+                progress = NSProgress(parent: mainProgress, userInfo: nil)
+                progress!.becomeCurrentWithPendingUnitCount(2)
+            }
             migrationBlock()
             migratedTo(version)
+            progress?.resignCurrent()
         }
     }
     
-    public func migrateToVersion(version: String, migrations: [NSOperation]) {
-        if canUpdateTo(version) {
+    public func migrateToVersion(version: String, mainProgress: NSProgress? = nil, migrations: [NSOperation]) {
+        if canUpdateTo(version) && !migrations.isEmpty {
             let queue = NSOperationQueue()
             queue.underlyingQueue = dispatch_queue_create(migrationQueue, DISPATCH_QUEUE_CONCURRENT)
+            
+            if let mainProgress = mainProgress {
+                progress = NSProgress(parent: mainProgress, userInfo: nil)
+                let count = Int64(migrations.count)
+                progress!.totalUnitCount = count
+                progress!.becomeCurrentWithPendingUnitCount(count)
+                for migration in migrations {
+                    let counter = ProgressCounter(progress: progress!)
+                    counter.addDependency(migration)
+                    queue.addOperation(counter)
+                }
+            }
             
             let didMigrateOperation = DidMigrateOperation(waxwing: self, version: version)
             didMigrateOperation.addDependency(migrations.last!)
             queue.addOperation(didMigrateOperation)
             
             queue.addOperations(migrations, waitUntilFinished: true)
+            progress?.resignCurrent()
         }
     }
     
@@ -47,6 +66,7 @@ public class Waxwing {
     
     private func migratedTo() -> String {
         let migratedTo = defaults.valueForKey(migratedToKey) as? String
+        progress?.completedUnitCount++
         return migratedTo ?? ""
     }
     
@@ -59,7 +79,7 @@ public class Waxwing {
         return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
     
-    class DidMigrateOperation: NSOperation {
+    private class DidMigrateOperation: NSOperation {
         
         let waxwing: Waxwing
         let version: String
@@ -73,6 +93,20 @@ public class Waxwing {
             waxwing.migratedTo(version)
         }
         
+    }
+    
+    private class ProgressCounter: NSOperation {
+
+        let progress: NSProgress
+        
+        init(progress: NSProgress) {
+            self.progress = progress
+        }
+        
+        override func start() {
+            progress.completedUnitCount++
+        }
+
     }
     
 }

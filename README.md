@@ -72,6 +72,28 @@ The `NSOperationQueue` based migrations are always run from their own queue so t
 
 You can add as many migrations as you want. They will always be executed once which makes reasoning about the state of your application a lot easier.
 
+## NSProgress
+
+Waxwing has built in support for [NSProgress](https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSProgress_Class/index.html). Since the number of actions that are run using the closure based method cannot be determined it just reports a total unit count of 1. If you're using NSOperations, the unit count will match the number of migrations.
+
+```swift
+import Waxwing
+
+let progress = NSProgress(totalUnitCount: 1)
+progress.becomeCurrentWithPendingUnitCount(1)
+progress.addObserver(self, forKeyPath: "fractionCompleted", options: .New, context: observerContext))
+
+waxwing.migrateToVersion("0.8", mainProgress: progress, migrations: [migration1, migration2, migration…])
+
+override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+  if let progress = object as? NSProgress where context == observerContext && keyPath == "fractionCompleted" {
+    // e.g. Update progress indicator
+  } else {
+    super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+  }
+}
+```
+
 ## Author
 
 Jan Gorman, gorman.jan@gmail.com
