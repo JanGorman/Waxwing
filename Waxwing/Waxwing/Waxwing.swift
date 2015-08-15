@@ -21,11 +21,10 @@ public class Waxwing {
         self.defaults = defaults
     }
     
-    public func migrateToVersion(version: String, mainProgress: NSProgress? = nil, migrationBlock: WaxwingMigrationBlock) {
+    public func migrateToVersion(version: String, parentProgress: NSProgress? = nil, migrationBlock: WaxwingMigrationBlock) {
         if canUpdateTo(version) {
-            if let mainProgress = mainProgress {
-                progress = NSProgress(parent: mainProgress, userInfo: nil)
-                progress!.becomeCurrentWithPendingUnitCount(2)
+            if let parentProgress = parentProgress {
+                initProgressAndBecomeCurrentWithParent(parentProgress, unitCount: 1)
             }
             migrationBlock()
             migratedTo(version)
@@ -33,16 +32,13 @@ public class Waxwing {
         }
     }
     
-    public func migrateToVersion(version: String, mainProgress: NSProgress? = nil, migrations: [NSOperation]) {
+    public func migrateToVersion(version: String, parentProgress: NSProgress? = nil, migrations: [NSOperation]) {
         if canUpdateTo(version) && !migrations.isEmpty {
             let queue = NSOperationQueue()
             queue.underlyingQueue = dispatch_queue_create(migrationQueue, DISPATCH_QUEUE_CONCURRENT)
             
-            if let mainProgress = mainProgress {
-                progress = NSProgress(parent: mainProgress, userInfo: nil)
-                let count = Int64(migrations.count)
-                progress!.totalUnitCount = count
-                progress!.becomeCurrentWithPendingUnitCount(count)
+            if let parentProgress = parentProgress {
+                initProgressAndBecomeCurrentWithParent(parentProgress, unitCount: Int64(migrations.count))
                 for migration in migrations {
                     let counter = ProgressCounter(progress: progress!)
                     counter.addDependency(migration)
@@ -57,6 +53,14 @@ public class Waxwing {
             queue.addOperations(migrations, waitUntilFinished: true)
             progress?.resignCurrent()
         }
+    }
+    
+    private func initProgressAndBecomeCurrentWithParent(parentProgress: NSProgress, unitCount: Int64) {
+        progress = NSProgress(parent: parentProgress, userInfo: nil)
+        progress!.pausable = false
+        progress!.cancellable = false
+        progress!.totalUnitCount = unitCount
+        progress!.becomeCurrentWithPendingUnitCount(unitCount)
     }
     
     private func canUpdateTo(version: NSString) -> Bool {

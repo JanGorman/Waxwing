@@ -7,10 +7,7 @@ iOS version migrations in Swift. When mangling data or performing any other kind
 ## Requirements
 
 * iOS 8+
-* Swift 1.2
-
-For Swift 1.2 use the branch `Swift/1.2`
-
+* Swift 1.2 and 2
 
 ## Installation
 
@@ -83,7 +80,7 @@ let progress = NSProgress(totalUnitCount: 1)
 progress.becomeCurrentWithPendingUnitCount(1)
 progress.addObserver(self, forKeyPath: "fractionCompleted", options: .New, context: observerContext))
 
-waxwing.migrateToVersion("0.8", mainProgress: progress, migrations: [migration1, migration2, migration…])
+waxwing.migrateToVersion("0.8", parentProgress: progress, migrations: [migration1, migration2, migration…])
 
 override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
   if let progress = object as? NSProgress where context == observerContext && keyPath == "fractionCompleted" {

@@ -123,7 +123,7 @@ class WaxwingTests: XCTestCase {
         progress = NSProgress(totalUnitCount: 1)
         progress?.becomeCurrentWithPendingUnitCount(1)
         progress?.addObserver(self, forKeyPath: WaxwingTests.KeyPath, options: .New, context: observerContext)
-        waxwing.migrateToVersion("1.0", mainProgress: progress) {
+        waxwing.migrateToVersion("1.0", parentProgress: progress) {
         }
         XCTAssertEqual(unitCount, 1)
     }
@@ -226,7 +226,7 @@ class WaxwingTests: XCTestCase {
         }
         
         let migrations = [migration1, migration2]
-        waxwing.migrateToVersion("0.8", mainProgress: progress, migrations: migrations)
+        waxwing.migrateToVersion("0.8", parentProgress: progress, migrations: migrations)
         
         waitForExpectationsWithTimeout(0.5) {
             _  in
