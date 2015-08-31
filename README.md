@@ -76,20 +76,26 @@ Waxwing has built in support for [NSProgress](https://developer.apple.com/librar
 ```swift
 import Waxwing
 
-let progress = NSProgress(totalUnitCount: 1)
-progress.becomeCurrentWithPendingUnitCount(1)
-progress.addObserver(self, forKeyPath: "fractionCompleted", options: .New, context: observerContext))
-
-waxwing.migrateToVersion("0.8", parentProgress: progress, migrations: [migration1, migration2, migration…])
+func migrate() {
+	let progress = NSProgress(totalUnitCount: 1)
+	progress.becomeCurrentWithPendingUnitCount(1)
+	progress.addObserver(self, forKeyPath: "fractionCompleted", options: .New, context: observerContext))
+	
+	waxwing.migrateToVersion("0.8", migrations: [migration1, migration2, migration3…])
+	
+	progress.resignCurrent()
+}
 
 override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
   if let progress = object as? NSProgress where context == observerContext && keyPath == "fractionCompleted" {
-    // e.g. Update progress indicator
+    // e.g. Update progress indicator, remember to do this on the main thread
   } else {
     super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
   }
 }
 ```
+
+For more information on how `NSProgress` works I recommend [this article](http://oleb.net/blog/2014/03/nsprogress/) by Ole Begemann.
 
 ## Author
 

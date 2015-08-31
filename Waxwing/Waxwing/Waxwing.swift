@@ -14,55 +14,46 @@ public class Waxwing {
 
     private let bundle: NSBundle
     private let defaults: NSUserDefaults
-    private var progress: NSProgress?
+    private var progress: NSProgress
 
     public init(bundle: NSBundle, defaults: NSUserDefaults) {
         self.bundle = bundle
         self.defaults = defaults
+        
+        progress = NSProgress()
+        progress.pausable = false
+        progress.cancellable = false
     }
     
-    public func migrateToVersion(version: String, parentProgress: NSProgress? = nil, migrationBlock: WaxwingMigrationBlock) {
+    public func migrateToVersion(version: String, migrationBlock: WaxwingMigrationBlock) {
         if canUpdateTo(version) {
-            if let parentProgress = parentProgress {
-                initProgressAndBecomeCurrentWithParent(parentProgress, unitCount: 1)
-            }
+            progress.totalUnitCount = 1
             migrationBlock()
             migratedTo(version)
-            progress?.resignCurrent()
+            progress.completedUnitCount = 1
         }
     }
     
-    public func migrateToVersion(version: String, parentProgress: NSProgress? = nil, migrations: [NSOperation]) {
+    public func migrateToVersion(version: String, migrations: [NSOperation]) {
         if canUpdateTo(version) && !migrations.isEmpty {
+            progress.totalUnitCount = Int64(migrations.count)
+
             let queue = NSOperationQueue()
             queue.underlyingQueue = dispatch_queue_create(migrationQueue, DISPATCH_QUEUE_CONCURRENT)
-            
-            if let parentProgress = parentProgress {
-                initProgressAndBecomeCurrentWithParent(parentProgress, unitCount: Int64(migrations.count))
-                for migration in migrations {
-                    let counter = ProgressCounter(progress: progress!)
-                    counter.addDependency(migration)
-                    queue.addOperation(counter)
-                }
+            for migration in migrations {
+                let counter = ProgressCounter(progress: progress)
+                counter.addDependency(migration)
+                queue.addOperation(counter)
             }
-            
+
             let didMigrateOperation = DidMigrateOperation(waxwing: self, version: version)
             didMigrateOperation.addDependency(migrations.last!)
             queue.addOperation(didMigrateOperation)
             
             queue.addOperations(migrations, waitUntilFinished: true)
-            progress?.resignCurrent()
         }
     }
-    
-    private func initProgressAndBecomeCurrentWithParent(parentProgress: NSProgress, unitCount: Int64) {
-        progress = NSProgress(parent: parentProgress, userInfo: nil)
-        progress!.pausable = false
-        progress!.cancellable = false
-        progress!.totalUnitCount = unitCount
-        progress!.becomeCurrentWithPendingUnitCount(unitCount)
-    }
-    
+
     private func canUpdateTo(version: NSString) -> Bool {
         return version.compare(migratedTo(), options: .NumericSearch) == NSComparisonResult.OrderedDescending
             && version.compare(appVersion(), options: .NumericSearch) != NSComparisonResult.OrderedDescending
@@ -70,7 +61,7 @@ public class Waxwing {
     
     private func migratedTo() -> String {
         let migratedTo = defaults.valueForKey(migratedToKey) as? String
-        progress?.completedUnitCount++
+        progress.completedUnitCount++
         return migratedTo ?? ""
     }
     

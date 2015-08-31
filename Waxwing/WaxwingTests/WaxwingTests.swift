@@ -41,12 +41,14 @@ class MockBundle: NSBundle {
 class WaxwingTests: XCTestCase {
     
     private static let KeyPath = "completedUnitCount"
+//    private static let KeyPath = "fractionCompleted"
     
     private lazy var observerContext = UnsafeMutablePointer<Void>.alloc(1)
     
     private var waxwing: Waxwing!
     private var progress: NSProgress?
     private var unitCount: Int!
+    private var KVOAssertion = false
     
     override func setUp() {
         super.setUp()
@@ -119,23 +121,6 @@ class WaxwingTests: XCTestCase {
         XCTAssertEqual(migrationCount, 1)
     }
     
-    func test_ReportsProgressUsingNSProgress_itReportsTheCorrectUnitCount() {
-        progress = NSProgress(totalUnitCount: 1)
-        progress?.becomeCurrentWithPendingUnitCount(1)
-        progress?.addObserver(self, forKeyPath: WaxwingTests.KeyPath, options: .New, context: observerContext)
-        waxwing.migrateToVersion("1.0", parentProgress: progress) {
-        }
-        XCTAssertEqual(unitCount, 1)
-    }
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if let progress = object as? NSProgress where context == observerContext && keyPath == WaxwingTests.KeyPath {
-            unitCount = Int(progress.completedUnitCount)
-        } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
-        }
-    }
-    
     // MARK: Queue
     
     func test_whenVersionIsGreaterThanAppVersionWithQueue_itDoesNotMigrate() {
@@ -202,37 +187,5 @@ class WaxwingTests: XCTestCase {
             XCTAssertEqual(migrationCount, 2)
         }
     }
-    
-    func test_ReportsProgressUsingNSProgressWithQueues_itReportsTheCorrectUnitCount() {
-        let expectation = expectationWithDescription("Migrate Queue")
-        
-        progress = NSProgress(totalUnitCount: 1)
-        progress?.becomeCurrentWithPendingUnitCount(1)
-        progress?.addObserver(self, forKeyPath: WaxwingTests.KeyPath, options: .New, context: observerContext)
-
-        let migration1 = NSOperation()
-        migration1.completionBlock = {
-        }
-        
-        let migration2 = NSOperation()
-        migration2.completionBlock = {
-            expectation.fulfill()
-        }
-        
-        let verification = NSOperation()
-        verification.addDependency(migration2)
-        verification.completionBlock = {
-            expectation.fulfill()
-        }
-        
-        let migrations = [migration1, migration2]
-        waxwing.migrateToVersion("0.8", parentProgress: progress, migrations: migrations)
-        
-        waitForExpectationsWithTimeout(0.5) {
-            _  in
-            XCTAssertEqual(self.unitCount, migrations.count)
-        }
-    }
-
     
 }
