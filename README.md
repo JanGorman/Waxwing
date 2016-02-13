@@ -16,7 +16,7 @@ it, simply add the following line to your Podfile:
 
     pod "Waxwing"
     
-If you don't like Cocoapods, you can also add the dependency via [Carthage](https://github.com/Carthage/Carthage) or simply include `Waxwing.swift` in your project.
+If you don't like CocoaPods, you can also add the dependency via [Carthage](https://github.com/Carthage/Carthage) or simply include `Waxwing.swift` in your project.
 
 ## Usage
 
