@@ -1,4 +1,7 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Version](https://img.shields.io/cocoapods/v/Waxwing.svg?style=flat)](http://cocoapods.org/pods/Waxwing)
+[![License](https://img.shields.io/cocoapods/l/Waxwing.svg?style=flat)](http://cocoapods.org/pods/Waxwing)
+[![Platform](https://img.shields.io/cocoapods/p/Waxwing.svg?style=flat)](http://cocoapods.org/pods/Waxwing)
 
 # Waxwing
 
