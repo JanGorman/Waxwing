@@ -2,6 +2,7 @@
 [![Version](https://img.shields.io/cocoapods/v/Waxwing.svg?style=flat)](http://cocoapods.org/pods/Waxwing)
 [![License](https://img.shields.io/cocoapods/l/Waxwing.svg?style=flat)](http://cocoapods.org/pods/Waxwing)
 [![Platform](https://img.shields.io/cocoapods/p/Waxwing.svg?style=flat)](http://cocoapods.org/pods/Waxwing)
+[![Build Status](https://travis-ci.org/JanGorman/Waxwing.svg?branch=master)](https://travis-ci.org/JanGorman/Waxwing)
 
 # Waxwing
 
