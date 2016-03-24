@@ -61,7 +61,7 @@ public class Waxwing {
     
     private func migratedTo() -> String {
         let migratedTo = defaults.valueForKey(migratedToKey) as? String
-        progress.completedUnitCount++
+        progress.completedUnitCount += 1
         return migratedTo ?? ""
     }
     
@@ -99,7 +99,7 @@ public class Waxwing {
         }
         
         override func start() {
-            progress.completedUnitCount++
+            progress.completedUnitCount += 1
         }
 
     }
