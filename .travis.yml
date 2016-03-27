@@ -7,9 +7,9 @@ language: objective-c
 # cache: cocoapods
 # podfile: Example/Podfile
 before_install:
-- gem install fastlane
-- gem install cocoapods # Since Travis is not always on latest version
+- gem install scan --no-doc
+- gem install cocoapods --no-doc
 # - pod install --project-directory=Example
 script:
-- set -o pipefail && fastlane test
+- set -o pipefail && scan --project 'Waxwing/Waxwing.xcodeproj'
 - pod lib lint
