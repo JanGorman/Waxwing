@@ -12,20 +12,20 @@ public class Waxwing {
     private let migratedToKey = "com.schnaub.Waxwing.migratedTo"
     private let migrationQueue = "com.schnaub.Waxwing.queue"
 
-    private let bundle: NSBundle
-    private let defaults: NSUserDefaults
-    private var progress: NSProgress
+    private let bundle: Bundle
+    private let defaults: UserDefaults
+    private var progress: Progress
 
-    public init(bundle: NSBundle, defaults: NSUserDefaults) {
+    public init(bundle: Bundle, defaults: UserDefaults) {
         self.bundle = bundle
         self.defaults = defaults
         
-        progress = NSProgress()
-        progress.pausable = false
-        progress.cancellable = false
+        progress = Progress()
+        progress.isPausable = false
+        progress.isCancellable = false
     }
     
-    public func migrateToVersion(version: String, migrationBlock: WaxwingMigrationBlock) {
+    public func migrateToVersion(_ version: String, migrationBlock: WaxwingMigrationBlock) {
         if canUpdateTo(version) {
             progress.totalUnitCount = 1
             migrationBlock()
@@ -34,12 +34,12 @@ public class Waxwing {
         }
     }
     
-    public func migrateToVersion(version: String, migrations: [NSOperation]) {
+    public func migrateToVersion(_ version: String, migrations: [Operation]) {
         if canUpdateTo(version) && !migrations.isEmpty {
             progress.totalUnitCount = Int64(migrations.count)
 
-            let queue = NSOperationQueue()
-            queue.underlyingQueue = dispatch_queue_create(migrationQueue, DISPATCH_QUEUE_CONCURRENT)
+            let queue = OperationQueue()
+            queue.underlyingQueue = DispatchQueue(label: migrationQueue, attributes: DispatchQueueAttributes.concurrent)
             for migration in migrations {
                 let counter = ProgressCounter(progress: progress)
                 counter.addDependency(migration)
@@ -54,18 +54,18 @@ public class Waxwing {
         }
     }
 
-    private func canUpdateTo(version: NSString) -> Bool {
-        return version.compare(migratedTo(), options: .NumericSearch) == NSComparisonResult.OrderedDescending
-            && version.compare(appVersion(), options: .NumericSearch) != NSComparisonResult.OrderedDescending
+    private func canUpdateTo(_ version: NSString) -> Bool {
+        return version.compare(migratedTo(), options: .numericSearch) == ComparisonResult.orderedDescending
+            && version.compare(appVersion(), options: .numericSearch) != ComparisonResult.orderedDescending
     }
     
     private func migratedTo() -> String {
-        let migratedTo = defaults.valueForKey(migratedToKey) as? String
+        let migratedTo = defaults.value(forKey: migratedToKey) as? String
         progress.completedUnitCount += 1
         return migratedTo ?? ""
     }
     
-    private func migratedTo(version: String) {
+    private func migratedTo(_ version: String) {
         defaults.setValue(version, forKey: migratedToKey)
         defaults.synchronize()
     }
@@ -74,7 +74,7 @@ public class Waxwing {
         return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
     
-    private class DidMigrateOperation: NSOperation {
+    private class DidMigrateOperation: Operation {
         
         let waxwing: Waxwing
         let version: String
@@ -90,11 +90,11 @@ public class Waxwing {
         
     }
     
-    private class ProgressCounter: NSOperation {
+    private class ProgressCounter: Operation {
 
-        let progress: NSProgress
+        let progress: Progress
         
-        init(progress: NSProgress) {
+        init(progress: Progress) {
             self.progress = progress
         }
         
