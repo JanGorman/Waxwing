@@ -7,14 +7,14 @@ import Foundation
 
 public typealias WaxwingMigrationBlock = () -> Void
 
-public class Waxwing {
+final class Waxwing {
 
-    private let migratedToKey = "com.schnaub.Waxwing.migratedTo"
-    private let migrationQueue = "com.schnaub.Waxwing.queue"
+    fileprivate let migratedToKey = "com.schnaub.Waxwing.migratedTo"
+    fileprivate let migrationQueue = "com.schnaub.Waxwing.queue"
 
-    private let bundle: Bundle
-    private let defaults: UserDefaults
-    private var progress: Progress
+    fileprivate let bundle: Bundle
+    fileprivate let defaults: UserDefaults
+    fileprivate var progress: Progress
 
     public init(bundle: Bundle, defaults: UserDefaults) {
         self.bundle = bundle
@@ -25,8 +25,8 @@ public class Waxwing {
         progress.isCancellable = false
     }
     
-    public func migrateToVersion(_ version: String, migrationBlock: WaxwingMigrationBlock) {
-        if canUpdateTo(version) {
+    open func migrateToVersion(_ version: String, migrationBlock: WaxwingMigrationBlock) {
+        if canUpdateTo(version as NSString) {
             progress.totalUnitCount = 1
             migrationBlock()
             migratedTo(version)
@@ -34,12 +34,12 @@ public class Waxwing {
         }
     }
     
-    public func migrateToVersion(_ version: String, migrations: [Operation]) {
-        if canUpdateTo(version) && !migrations.isEmpty {
+    open func migrateToVersion(_ version: String, migrations: [Operation]) {
+        if canUpdateTo(version as NSString) && !migrations.isEmpty {
             progress.totalUnitCount = Int64(migrations.count)
 
             let queue = OperationQueue()
-            queue.underlyingQueue = DispatchQueue(label: migrationQueue, attributes: DispatchQueueAttributes.concurrent)
+            queue.underlyingQueue = DispatchQueue(label: migrationQueue, attributes: .concurrent)
             for migration in migrations {
                 let counter = ProgressCounter(progress: progress)
                 counter.addDependency(migration)
@@ -54,27 +54,27 @@ public class Waxwing {
         }
     }
 
-    private func canUpdateTo(_ version: NSString) -> Bool {
-        return version.compare(migratedTo(), options: .numericSearch) == ComparisonResult.orderedDescending
-            && version.compare(appVersion(), options: .numericSearch) != ComparisonResult.orderedDescending
+    fileprivate func canUpdateTo(_ version: NSString) -> Bool {
+        return version.compare(migratedTo(), options: .numeric) == .orderedDescending
+            && version.compare(appVersion(), options: .numeric) != .orderedDescending
     }
     
-    private func migratedTo() -> String {
-        let migratedTo = defaults.value(forKey: migratedToKey) as? String
+    fileprivate func migratedTo() -> String {
+        let migratedTo = defaults.string(forKey: migratedToKey)
         progress.completedUnitCount += 1
         return migratedTo ?? ""
     }
     
-    private func migratedTo(_ version: String) {
-        defaults.setValue(version, forKey: migratedToKey)
+    fileprivate func migratedTo(_ version: String) {
+        defaults.set(version, forKey: migratedToKey)
         defaults.synchronize()
     }
     
-    private func appVersion() -> String {
-        return bundle.objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+    fileprivate func appVersion() -> String {
+        return bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
     
-    private class DidMigrateOperation: Operation {
+    fileprivate class DidMigrateOperation: Operation {
         
         let waxwing: Waxwing
         let version: String
@@ -90,7 +90,7 @@ public class Waxwing {
         
     }
     
-    private class ProgressCounter: Operation {
+    fileprivate class ProgressCounter: Operation {
 
         let progress: Progress
         

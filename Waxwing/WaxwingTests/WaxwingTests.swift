@@ -9,27 +9,24 @@ import Waxwing
 
 class MockUserDefaults: UserDefaults {
     
-    let migratedToKey = "com.schnaub.Waxwing.migratedTo"
-    var version: String?
-    
-    override func setValue(_ value: AnyObject?, forKey key: String) {
-        if key == migratedToKey {
-            version = value as? String
-        }
-    }
-    
-    override func value(forKey key: String) -> AnyObject? {
-        if key == migratedToKey {
-            return version
-        }
-        return nil
-    }
+  let migratedToKey = "com.schnaub.Waxwing.migratedTo"
+  var version: String?
+
+  override func set(_ value: Any?, forKey defaultName: String) {
+    guard defaultName == migratedToKey else { return }
+    version = value as? String
+  }
+
+  override func string(forKey defaultName: String) -> String? {
+    guard defaultName == migratedToKey else { return nil }
+    return version
+  }
     
 }
 
 class MockBundle: Bundle {
   
-  override func objectForInfoDictionaryKey(_ key: String) -> AnyObject? {
+  override func object(forInfoDictionaryKey key: String) -> Any? {
     if key == "CFBundleShortVersionString" {
       return "1.0.0"
     }
@@ -40,14 +37,14 @@ class MockBundle: Bundle {
 
 class WaxwingTests: XCTestCase {
     
-    private static let KeyPath = "completedUnitCount"
+    fileprivate static let KeyPath = "completedUnitCount"
   
-    private lazy var observerContext = UnsafeMutablePointer<Void>(allocatingCapacity: 1)
+    fileprivate lazy var observerContext = UnsafeMutableRawPointer.allocate(bytes: 1, alignedTo: 0)
     
-    private var waxwing: Waxwing!
-    private var progress: Progress?
-    private var unitCount: Int!
-    private var KVOAssertion = false
+    fileprivate var waxwing: Waxwing!
+    fileprivate var progress: Progress?
+    fileprivate var unitCount: Int!
+    fileprivate var KVOAssertion = false
     
     override func setUp() {
         super.setUp()
@@ -62,7 +59,7 @@ class WaxwingTests: XCTestCase {
         super.tearDown()
 
         progress?.removeObserver(self, forKeyPath: WaxwingTests.KeyPath, context: observerContext)
-        observerContext.deallocateCapacity(1)
+        observerContext.deallocate(bytes: 1, alignedTo: 0)
     }
     
     // MARK: Blocks
@@ -136,7 +133,7 @@ class WaxwingTests: XCTestCase {
     }
     
     func test_whenVersionIsLessThanAppVersionWithQueue_itDoesMigrate() {
-        let expectation = self.expectation(withDescription: "Migrate Queue")
+        let expectation = self.expectation(description: "Migrate Queue")
         
         var didMigrate = false
         let migration = Operation()
@@ -151,14 +148,14 @@ class WaxwingTests: XCTestCase {
         
         waxwing.migrateToVersion("0.9", migrations: [migration, verification])
 
-        waitForExpectations(withTimeout: 0.5) {
+        waitForExpectations(timeout: 0.5) {
             _  in
             XCTAssertTrue(didMigrate)
         }
     }
     
     func test_whenMigratingMultipleVersionWithQueue_itMigratesAll() {
-        let expectation = self.expectation(withDescription: "Migrate Queue")
+        let expectation = self.expectation(description: "Migrate Queue")
         
         var migrationCount = 0
         let migration = Operation()
@@ -181,7 +178,7 @@ class WaxwingTests: XCTestCase {
 
         waxwing.migrateToVersion("0.9", migrations: [secondMigration, verification])
 
-        waitForExpectations(withTimeout: 0.5) {
+        waitForExpectations(timeout: 0.5) {
             _  in
             XCTAssertEqual(migrationCount, 2)
         }
