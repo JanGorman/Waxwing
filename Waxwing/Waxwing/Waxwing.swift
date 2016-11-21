@@ -7,7 +7,7 @@ import Foundation
 
 public typealias WaxwingMigrationBlock = () -> Void
 
-final class Waxwing {
+public final class Waxwing {
 
     fileprivate let migratedToKey = "com.schnaub.Waxwing.migratedTo"
     fileprivate let migrationQueue = "com.schnaub.Waxwing.queue"
@@ -25,7 +25,7 @@ final class Waxwing {
         progress.isCancellable = false
     }
     
-    open func migrateToVersion(_ version: String, migrationBlock: WaxwingMigrationBlock) {
+    public func migrateToVersion(_ version: String, migrationBlock: WaxwingMigrationBlock) {
         if canUpdateTo(version as NSString) {
             progress.totalUnitCount = 1
             migrationBlock()
@@ -34,7 +34,7 @@ final class Waxwing {
         }
     }
     
-    open func migrateToVersion(_ version: String, migrations: [Operation]) {
+    public func migrateToVersion(_ version: String, migrations: [Operation]) {
         if canUpdateTo(version as NSString) && !migrations.isEmpty {
             progress.totalUnitCount = Int64(migrations.count)
 
@@ -54,27 +54,27 @@ final class Waxwing {
         }
     }
 
-    fileprivate func canUpdateTo(_ version: NSString) -> Bool {
+    private func canUpdateTo(_ version: NSString) -> Bool {
         return version.compare(migratedTo(), options: .numeric) == .orderedDescending
             && version.compare(appVersion(), options: .numeric) != .orderedDescending
     }
     
-    fileprivate func migratedTo() -> String {
+    private func migratedTo() -> String {
         let migratedTo = defaults.string(forKey: migratedToKey)
         progress.completedUnitCount += 1
         return migratedTo ?? ""
     }
     
-    fileprivate func migratedTo(_ version: String) {
+    private func migratedTo(_ version: String) {
         defaults.set(version, forKey: migratedToKey)
         defaults.synchronize()
     }
     
-    fileprivate func appVersion() -> String {
+    private func appVersion() -> String {
         return bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
     
-    fileprivate class DidMigrateOperation: Operation {
+    private class DidMigrateOperation: Operation {
         
         let waxwing: Waxwing
         let version: String
@@ -90,7 +90,7 @@ final class Waxwing {
         
     }
     
-    fileprivate class ProgressCounter: Operation {
+    private class ProgressCounter: Operation {
 
         let progress: Progress
         
