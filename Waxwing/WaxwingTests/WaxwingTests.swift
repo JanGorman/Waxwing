@@ -7,48 +7,44 @@ import UIKit
 import XCTest
 import Waxwing
 
-class MockUserDefaults: NSUserDefaults {
+class MockUserDefaults: UserDefaults {
     
-    let migratedToKey = "com.schnaub.Waxwing.migratedTo"
-    var version: String?
-    
-    override func setValue(value: AnyObject?, forKey key: String) {
-        if key == migratedToKey {
-            version = value as? String
-        }
-    }
-    
-    override func valueForKey(key: String) -> AnyObject? {
-        if key == migratedToKey {
-            return version
-        }
-        return nil
-    }
+  let migratedToKey = "com.schnaub.Waxwing.migratedTo"
+  var version: String?
+
+  override func set(_ value: Any?, forKey defaultName: String) {
+    guard defaultName == migratedToKey else { return }
+    version = value as? String
+  }
+
+  override func string(forKey defaultName: String) -> String? {
+    guard defaultName == migratedToKey else { return nil }
+    return version
+  }
     
 }
 
-class MockBundle: NSBundle {
-    
-    override func objectForInfoDictionaryKey(key: String) -> AnyObject? {
-        if key == "CFBundleShortVersionString" {
-            return "1.0.0"
-        }
-        return nil
+class MockBundle: Bundle {
+  
+  override func object(forInfoDictionaryKey key: String) -> Any? {
+    if key == "CFBundleShortVersionString" {
+      return "1.0.0"
     }
+    return nil
+  }
     
 }
 
 class WaxwingTests: XCTestCase {
     
-    private static let KeyPath = "completedUnitCount"
-//    private static let KeyPath = "fractionCompleted"
+    fileprivate static let KeyPath = "completedUnitCount"
+  
+    fileprivate lazy var observerContext = UnsafeMutableRawPointer.allocate(bytes: 1, alignedTo: 0)
     
-    private lazy var observerContext = UnsafeMutablePointer<Void>.alloc(1)
-    
-    private var waxwing: Waxwing!
-    private var progress: NSProgress?
-    private var unitCount: Int!
-    private var KVOAssertion = false
+    fileprivate var waxwing: Waxwing!
+    fileprivate var progress: Progress?
+    fileprivate var unitCount: Int!
+    fileprivate var KVOAssertion = false
     
     override func setUp() {
         super.setUp()
@@ -63,7 +59,7 @@ class WaxwingTests: XCTestCase {
         super.tearDown()
 
         progress?.removeObserver(self, forKeyPath: WaxwingTests.KeyPath, context: observerContext)
-        observerContext.dealloc(1)
+        observerContext.deallocate(bytes: 1, alignedTo: 0)
     }
     
     // MARK: Blocks
@@ -126,7 +122,7 @@ class WaxwingTests: XCTestCase {
     func test_whenVersionIsGreaterThanAppVersionWithQueue_itDoesNotMigrate() {
         var didMigrate = false
         
-        let migration = NSOperation()
+        let migration = Operation()
         migration.completionBlock = {
             didMigrate = true
         }
@@ -137,14 +133,14 @@ class WaxwingTests: XCTestCase {
     }
     
     func test_whenVersionIsLessThanAppVersionWithQueue_itDoesMigrate() {
-        let expectation = expectationWithDescription("Migrate Queue")
+        let expectation = self.expectation(description: "Migrate Queue")
         
         var didMigrate = false
-        let migration = NSOperation()
+        let migration = Operation()
         migration.completionBlock = {
             didMigrate = true
         }
-        let verification = NSOperation()
+        let verification = Operation()
         verification.addDependency(migration)
         verification.completionBlock = {
             expectation.fulfill()
@@ -152,29 +148,29 @@ class WaxwingTests: XCTestCase {
         
         waxwing.migrateToVersion("0.9", migrations: [migration, verification])
 
-        waitForExpectationsWithTimeout(0.5) {
+        waitForExpectations(timeout: 0.5) {
             _  in
             XCTAssertTrue(didMigrate)
         }
     }
     
     func test_whenMigratingMultipleVersionWithQueue_itMigratesAll() {
-        let expectation = expectationWithDescription("Migrate Queue")
+        let expectation = self.expectation(description: "Migrate Queue")
         
         var migrationCount = 0
-        let migration = NSOperation()
+        let migration = Operation()
         migration.completionBlock = {
             migrationCount += 1
         }
         
         waxwing.migrateToVersion("0.8", migrations: [migration])
         
-        let secondMigration = NSOperation()
+        let secondMigration = Operation()
         secondMigration.completionBlock = {
             migrationCount += 1
         }
         
-        let verification = NSOperation()
+        let verification = Operation()
         verification.addDependency(secondMigration)
         verification.completionBlock = {
             expectation.fulfill()
@@ -182,7 +178,7 @@ class WaxwingTests: XCTestCase {
 
         waxwing.migrateToVersion("0.9", migrations: [secondMigration, verification])
 
-        waitForExpectationsWithTimeout(0.5) {
+        waitForExpectations(timeout: 0.5) {
             _  in
             XCTAssertEqual(migrationCount, 2)
         }
