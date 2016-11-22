@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Waxwing"
-  s.version      = "2.0.5"
+  s.version      = "3.0.0"
   s.summary      = "iOS version migrations"
 
   s.description  = <<-DESC
