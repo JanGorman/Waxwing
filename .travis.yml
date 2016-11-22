@@ -1,15 +1,10 @@
-# references:
-# * http://www.objc.io/issue-6/travis-ci.html
-# * https://github.com/supermarin/xcpretty#usage
-
 osx_image: xcode8.0
 language: objective-c
-# cache: cocoapods
-# podfile: Example/Podfile
+rvm:
+  - 2.2
 before_install:
 - gem install scan --no-doc
 - gem install cocoapods --no-doc
-# - pod install --project-directory=Example
 script:
 - set -o pipefail && scan --project 'Waxwing/Waxwing.xcodeproj'
 # - pod lib lint
