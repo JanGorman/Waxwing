@@ -3,6 +3,7 @@ language: objective-c
 rvm:
   - 2.2
 before_install:
+- gem install bundler -v '>= 1.13.4' --no-doc
 - gem install scan --no-doc
 - gem install cocoapods --no-doc
 script:
