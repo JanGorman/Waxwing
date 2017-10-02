@@ -15,7 +15,7 @@ public final class Waxwing {
   fileprivate let defaults: UserDefaults
   fileprivate var progress: Progress
   
-  public init(bundle: Bundle, defaults: UserDefaults) {
+  public init(bundle: Bundle = .main, defaults: UserDefaults = .standard) {
     self.bundle = bundle
     self.defaults = defaults
     
