@@ -1,9 +1,5 @@
 //
-//  Waxwing.h
-//  Waxwing
-//
-//  Created by Jan Gorman on 10/03/15.
-//  Copyright (c) 2015 Jan Gorman. All rights reserved.
+//  Copyright (c) 2017 Jan Gorman. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

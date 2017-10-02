@@ -11,7 +11,7 @@ iOS version migrations in Swift. When mangling data or performing any other kind
 ## Requirements
 
 * iOS 8+
-* Swift 1.2, 2, 2.2
+* Swift 4
 
 ## Installation
 
