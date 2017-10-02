@@ -1,6 +1,7 @@
 language: objective-c
 osx_image: xcode9
 script:
+  - cd Waxwing
   - bundle exec fastlane scan --code_coverage true
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J 'Hippolyte'
