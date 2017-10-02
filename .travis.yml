@@ -4,4 +4,4 @@ script:
   - cd Waxwing
   - bundle exec fastlane scan --code_coverage true
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -J 'Hippolyte'
+  - bash <(curl -s https://codecov.io/bash) -J 'Waxwing'
