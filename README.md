@@ -72,7 +72,7 @@ The `OperationQueue` based migrations are always run from their own queue so the
 
 You can add as many migrations as you want. They will always be executed once which makes reasoning about the state of your application a lot easier.
 
-## NSProgress
+## Progress
 
 Waxwing has built in support for [Progress](https://developer.apple.com/documentation/foundation/progress). Since the number of actions that are run using the closure based method cannot be determined it just reports a total unit count of 1. If you're using NSOperations, the unit count will match the number of migrations.
 
@@ -94,7 +94,7 @@ For more information on how `Progress` works I recommend [this article](http://o
 
 ## Author
 
-Jan Gorman, gorman.jan@gmail.com
+Jan Gorman
 
 ## License
 
