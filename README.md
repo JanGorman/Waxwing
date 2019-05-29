@@ -34,9 +34,9 @@ import Waxwing
 let waxwing = Waxwing(bundle: .main, defaults: .standard)
 
 waxwing.migrateToVersion("0.9") {
-	firstMigrationCall()
-	secondMigrationCall()
-	…
+  firstMigrationCall()
+  secondMigrationCall()
+  … 
 }
 ```
 
@@ -57,12 +57,12 @@ Note that closure based migrations are run from the thread they are created on. 
 import Waxwing
 
 DispatchQueue.global().async {
-	let waxwing = Waxwing(bundle: .main, defaults: .standard)
-	waxwing.migrateToVersion("0.9") {
-		DispatchQueue.main.async {
-			// Some alert that we're done updating / what's new in this version of the app
-		}
-	}
+  let waxwing = Waxwing(bundle: .main, defaults: .standard)
+  waxwing.migrateToVersion("0.9") {
+    DispatchQueue.main.async {
+      // Some alert that we're done updating / what's new in this version of the app
+    }
+  }
 }
 ```
 
@@ -78,13 +78,13 @@ Waxwing has built in support for [Progress](https://developer.apple.com/document
 import Waxwing
 
 func migrate() {
-	let progress = Progress(totalUnitCount: 1)
-	progress.becomeCurrent(withPendingUnitCount: 1)
-	_ = progress.observe(\.fractionCompleted, options: [.new]) { progress, _ in
-		// e.g. Update progress indicator, remember to do this on the main thread
-	}
-	
-	waxwing.migrateToVersion("0.8", migrations: [migration1, migration2, migration3…])
+  let progress = Progress(totalUnitCount: 1)
+  progress.becomeCurrent(withPendingUnitCount: 1)
+  _ = progress.observe(\.fractionCompleted, options: [.new]) { progress, _ in
+    // e.g. Update progress indicator, remember to do this on the main thread
+  }
+  
+  waxwing.migrateToVersion("0.8", migrations: [migration1, migration2, migration3…])
 }
 ```
 
