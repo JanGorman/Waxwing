@@ -1,8 +1,9 @@
 Pod::Spec.new do |s|
 
   s.name         = "Waxwing"
-  s.version      = "4.0.0"
+  s.version      = "5.0.0"
   s.summary      = "iOS version migrations"
+  s.swift_version= "5.0"
 
   s.description  = <<-DESC
                    iOS version migrations in Swift. When mangling data or performing any other kind of updates you want to ensure that all relevant migrations are run in order and only once. Waxwing allows you to just that.

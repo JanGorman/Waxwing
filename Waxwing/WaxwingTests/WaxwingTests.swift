@@ -6,44 +6,16 @@ import UIKit
 import XCTest
 import Waxwing
 
-class MockUserDefaults: UserDefaults {
+final class WaxwingTests: XCTestCase {
   
-  let migratedToKey = "com.schnaub.Waxwing.migratedTo"
-  var version: String?
+  private static let keyPath = "completedUnitCount"
   
-  override func set(_ value: Any?, forKey defaultName: String) {
-    guard defaultName == migratedToKey else { return }
-    version = value as? String
-  }
+  private let observerContext = UnsafeMutableRawPointer.allocate(byteCount: 1, alignment: 0)
   
-  override func string(forKey defaultName: String) -> String? {
-    guard defaultName == migratedToKey else { return nil }
-    return version
-  }
-  
-}
-
-class MockBundle: Bundle {
-  
-  override func object(forInfoDictionaryKey key: String) -> Any? {
-    if key == "CFBundleShortVersionString" {
-      return "1.0.0"
-    }
-    return nil
-  }
-  
-}
-
-class WaxwingTests: XCTestCase {
-  
-  fileprivate static let KeyPath = "completedUnitCount"
-  
-  fileprivate lazy var observerContext = UnsafeMutableRawPointer.allocate(bytes: 1, alignedTo: 0)
-  
-  fileprivate var waxwing: Waxwing!
-  fileprivate var progress: Progress?
-  fileprivate var unitCount: Int!
-  fileprivate var KVOAssertion = false
+  private var waxwing: Waxwing!
+  private var progress: Progress?
+  private var unitCount: Int!
+  private var KVOAssertion = false
   
   override func setUp() {
     super.setUp()
@@ -55,14 +27,11 @@ class WaxwingTests: XCTestCase {
   }
   
   override func tearDown() {
+    progress?.removeObserver(self, forKeyPath: WaxwingTests.keyPath, context: observerContext)
+    observerContext.deallocate()
     super.tearDown()
-    
-    progress?.removeObserver(self, forKeyPath: WaxwingTests.KeyPath, context: observerContext)
-    observerContext.deallocate(bytes: 1, alignedTo: 0)
   }
-  
-  // MARK: Blocks
-  
+
   func test_whenVersionIsGreaterThanAppVersion_itDoesNotMigrate() {
     var didMigrate = false
     waxwing.migrateToVersion("1.0.1") {
@@ -115,9 +84,7 @@ class WaxwingTests: XCTestCase {
     
     XCTAssertEqual(migrationCount, 1)
   }
-  
-  // MARK: Queue
-  
+
   func test_whenVersionIsGreaterThanAppVersionWithQueue_itDoesNotMigrate() {
     var didMigrate = false
     
@@ -181,4 +148,36 @@ class WaxwingTests: XCTestCase {
     }
   }
   
+}
+
+final class MockUserDefaults: UserDefaults {
+
+  let migratedToKey = "com.schnaub.Waxwing.migratedTo"
+  var version: String?
+
+  override func set(_ value: Any?, forKey defaultName: String) {
+    guard defaultName == migratedToKey else {
+      return
+    }
+    version = value as? String
+  }
+
+  override func string(forKey defaultName: String) -> String? {
+    guard defaultName == migratedToKey else {
+      return nil
+    }
+    return version
+  }
+
+}
+
+final class MockBundle: Bundle {
+
+  override func object(forInfoDictionaryKey key: String) -> Any? {
+    if key == "CFBundleShortVersionString" {
+      return "1.0.0"
+    }
+    return nil
+  }
+
 }

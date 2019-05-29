@@ -8,12 +8,18 @@ public typealias WaxwingMigrationBlock = () -> Void
 
 public final class Waxwing {
   
-  fileprivate let migratedToKey = "com.schnaub.Waxwing.migratedTo"
-  fileprivate let migrationQueue = "com.schnaub.Waxwing.queue"
-  
-  fileprivate let bundle: Bundle
-  fileprivate let defaults: UserDefaults
-  fileprivate var progress: Progress
+  private let migratedToKey = "com.schnaub.Waxwing.migratedTo"
+  private let migrationQueueLabel = "com.schnaub.Waxwing.queue"
+
+  private let bundle: Bundle
+  private let defaults: UserDefaults
+  private var progress: Progress
+  private lazy var underlyingQueue = DispatchQueue(label: migrationQueueLabel, attributes: .concurrent)
+  private lazy var queue: OperationQueue = {
+    let queue = OperationQueue()
+    queue.underlyingQueue = underlyingQueue
+    return queue
+  }()
   
   public init(bundle: Bundle = .main, defaults: UserDefaults = .standard) {
     self.bundle = bundle
@@ -36,9 +42,7 @@ public final class Waxwing {
   public func migrateToVersion(_ version: String, migrations: [Operation]) {
     if canUpdateTo(version as NSString) && !migrations.isEmpty {
       progress.totalUnitCount = Int64(migrations.count)
-      
-      let queue = OperationQueue()
-      queue.underlyingQueue = DispatchQueue(label: migrationQueue, attributes: .concurrent)
+
       for migration in migrations {
         let counter = ProgressCounter(progress: progress)
         counter.addDependency(migration)
@@ -66,7 +70,6 @@ public final class Waxwing {
   
   private func migratedTo(_ version: String) {
     defaults.set(version, forKey: migratedToKey)
-    defaults.synchronize()
   }
   
   private func appVersion() -> String {

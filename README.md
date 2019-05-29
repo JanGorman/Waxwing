@@ -11,17 +11,16 @@ iOS version migrations in Swift. When mangling data or performing any other kind
 
 ## Requirements
 
-* Swift 4
+* Swift 5
 * iOS 8+
 
 ## Installation
 
-Waxwing is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+Waxwing is available through [CocoaPods](http://cocoapods.org). To install add the following line to your Podfile:
 
     pod "Waxwing"
     
-If you don't like CocoaPods, you can also add the dependency via [Carthage](https://github.com/Carthage/Carthage) or simply include `Waxwing.swift` in your project.
+If you don't like CocoaPods, you can add the dependency via [Carthage](https://github.com/Carthage/Carthage) or include `Waxwing.swift` in your project.
 
 ## Usage
 
@@ -47,7 +46,6 @@ or
 import Waxwing
 
 …
-// No need to explicitly set userdefaults or bundle
 let waxwing = Waxwing()
 
 Waxwing.migrateToVersion("0.9", [FirstMigrationClass(), SecondMigrationClass()])
@@ -68,13 +66,13 @@ DispatchQueue.global().async {
 }
 ```
 
-The `OperationQueue` based migrations are always run from their own queue so the same caveat applies. Also note, that if any of the migrations in the queue depend on another one having run first, you explicitly need to add that dependency. `Operation` of course makes this trivial through the `addDependency()` method.
+The `OperationQueue` based migrations are always run from their own queue so the same caveat applies. Also note, that if any of the migrations in the queue depend on another one having run first, you explicitly need to add that dependency. `Operation` makes this trivial through the `addDependency()` method.
 
-You can add as many migrations as you want. They will always be executed once which makes reasoning about the state of your application a lot easier.
+You can add as many migrations as you want. They will only ever be executed once.
 
 ## Progress
 
-Waxwing has built in support for [Progress](https://developer.apple.com/documentation/foundation/progress). Since the number of actions that are run using the closure based method cannot be determined it just reports a total unit count of 1. If you're using Operations, the unit count will match the number of migrations.
+Waxwing has built in support for [Progress](https://developer.apple.com/documentation/foundation/progress). Since the number of actions that are run using the closure based method cannot be determined it just reports a total unit count of 1. If you're using operations, the unit count will match the number of migrations.
 
 ```swift
 import Waxwing
