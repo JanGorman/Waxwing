@@ -2,7 +2,6 @@
 //  Copyright (c) 2017 Jan Gorman. All rights reserved.
 //
 
-import UIKit
 import XCTest
 import Waxwing
 

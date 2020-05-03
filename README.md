@@ -16,11 +16,31 @@ iOS version migrations in Swift. When mangling data or performing any other kind
 
 ## Installation
 
+### Cocoapods
+
 Waxwing is available through [CocoaPods](http://cocoapods.org). To install add the following line to your Podfile:
 
     pod "Waxwing"
     
+### Carthage
+
 If you don't like CocoaPods, you can add the dependency via [Carthage](https://github.com/Carthage/Carthage) or include `Waxwing.swift` in your project.
+
+### Swift Package Manager
+
+You can use the [Swift Package Manager][url-swift-pm] to install `Waxwing` by adding it to your `Package.swift` file:
+
+```swift
+import PackageDescription
+
+let package = Package(
+    name: "YOUR_PROJECT_NAME",
+    targets: [],
+    dependencies: [
+        .Package(url: "https://github.com/JanGorman/Waxwing", majorVersion: 5),
+    ]
+)
+```
 
 ## Usage
 
@@ -98,3 +118,5 @@ Jan Gorman
 
 Waxwing is available under the MIT license. See the LICENSE file for more info.
 
+
+[url-swift-pm]: https://swift.org/package-manager
