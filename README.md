@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/JanGorman/Waxwing.svg?branch=master)](https://travis-ci.org/JanGorman/Waxwing)
 [![codecov](https://codecov.io/gh/JanGorman/Waxwing/branch/master/graph/badge.svg)](https://codecov.io/gh/JanGorman/Waxwing)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![SPM](https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat)](https://swift.org/package-manager)
 [![Version](https://img.shields.io/cocoapods/v/Waxwing.svg?style=flat)](http://cocoapods.org/pods/Waxwing)
 [![License](https://img.shields.io/cocoapods/l/Waxwing.svg?style=flat)](http://cocoapods.org/pods/Waxwing)
 [![Platform](https://img.shields.io/cocoapods/p/Waxwing.svg?style=flat)](http://cocoapods.org/pods/Waxwing)

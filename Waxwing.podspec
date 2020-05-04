@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Waxwing"
-  s.version      = "5.0.0"
+  s.version      = "5.0.1"
   s.summary      = "iOS version migrations"
   s.swift_version= "5.0"
 
