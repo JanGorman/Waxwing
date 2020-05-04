@@ -34,4 +34,22 @@ DerivedData/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+### Swift Package Manager ###
+.build
+DerivedData
+/.previous-build
+xcuserdata
+.DS_Store
+*~
+\#*
+.\#*
+.*.sw[nop]
+*.xcscmblueprint
+/default.profraw
+Utilities/Docker/*.tar.gz
+.swiftpm
+Package.resolved
+/build
+*.pyc
+
 # End of https://www.gitignore.io/api/Xcode
